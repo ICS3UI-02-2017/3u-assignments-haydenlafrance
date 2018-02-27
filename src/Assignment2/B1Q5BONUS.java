@@ -26,5 +26,6 @@ public class B1Q5BONUS {
         RobotSE steven = new RobotSE(kw, 0, 0, Direction.EAST);
        
         new Wall(kw, 1, 1, Direction.EAST);
+        
     }
 }
