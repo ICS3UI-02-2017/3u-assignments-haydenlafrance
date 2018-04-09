@@ -33,34 +33,34 @@ public class E1Q1 {
         origWord = origWord.toLowerCase();
       
         ///turn your old word into your new word
-        String newWord = " " +origWord; 
+        String tranWord = " " +origWord; 
         
        
         // find the lenth of your position
-        int lenth = newWord.length();
+        int lenth = tranWord.length();
                 
         //what is the vowels length
         for(int i = 0; i < lenth; i++){
 
                 //the charachtor at postition i, is it a vowel? 
-                if (newWord.charAt(i)=='a'||
-                    newWord.charAt(i)=='e'||
-                    newWord.charAt(i)=='i'||
-                    newWord.charAt(i)=='o'||
-                    newWord.charAt(i)=='u')
+                if (tranWord.charAt(i)=='a'||
+                    tranWord.charAt(i)=='e'||
+                    tranWord.charAt(i)=='i'||
+                    tranWord.charAt(i)=='o'||
+                    tranWord.charAt(i)=='u')
                 { //teh charactor at position i-1, is it a vowel?
-                    if(!(newWord.charAt(i-1)=='a'||
-                    newWord.charAt(i-1)=='e'||
-                    newWord.charAt(i-1)=='i'||
-                    newWord.charAt(i-1)=='o'||
-                    newWord.charAt(i-1)=='u')) {
+                    if(!(tranWord.charAt(i-1)=='a'||
+                    tranWord.charAt(i-1)=='e'||
+                    tranWord.charAt(i-1)=='i'||
+                    tranWord.charAt(i-1)=='o'||
+                    tranWord.charAt(i-1)=='u')) {
                       
              //create your new word     
-             String start = newWord.substring(0, i);
-             String end = newWord.substring(i);
-             newWord = start + "ub" + end;
+             String start = tranWord.substring(0, i);
+             String end = tranWord.substring(i);
+             tranWord = start + "ub" + end;
              
-             lenth = newWord.length();
+             lenth = tranWord.length();
              //keep checking the lenth of the word 
              i = i + 2;
              
@@ -69,9 +69,10 @@ public class E1Q1 {
            
           } 
             //you word is ----- after it has been translated
-            System.out.println("your word in Ubbi Dubbi is" + newWord);
+            System.out.println(origWord + "is" + tranWord + "in Ubbi Dubbi");
         }
     }
 }
+
 
 
