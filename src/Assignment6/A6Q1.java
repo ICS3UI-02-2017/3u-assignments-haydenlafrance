@@ -17,17 +17,34 @@ public class A6Q1 {
      */
     public static void main(String[] args) {
      
-        //scan input
+        //scan input and ask how many studnets there are 
         Scanner input = new Scanner(System.in);
         System.out.println("How many studnets are in the class?");
         int students = input.nextInt();
-        double[] expenses = new double[students];
+        double[] marks = new double[students];
         System.out.println("What are thier marks?");
-        int fun = ne
+        
+        for (int i = 0; i < marks.length; i++) {
+            marks [i] = input.nextDouble();
+
+            
+        }
+        //take all the marks, add them together and create an avg
+                    double totalmarks = 0;
+                    double avg = 0;
+        for (int j = 0; j < marks.length; j++) {
+
+            totalmarks = totalmarks + marks [j];
+            avg = (totalmarks/students);
+        }
+        // print out the mark avg 
+       System.out.println("The average is " + avg);
+        
+        
+                
         
         
         
         
-        
-    }
-}
+    }}
+
