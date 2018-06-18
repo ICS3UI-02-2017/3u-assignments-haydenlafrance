@@ -2,6 +2,7 @@ package Assignment8;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import javax.swing.JComponent;
@@ -68,14 +69,21 @@ public class Gameassignment extends JComponent implements ActionListener {
     int ScreenX = 0;
     int ScreenY = 0;
     
-    Rectangle ball = new Rectangle((int)ballX,(int)ballY,15,15);
-    Rectangle wall4 = new Rectangle (300,200, 400, 200);
-    Rectangle wall2 = new Rectangle (900, 200, 200, 400);
+    //font size 
+    int gameover = 0;
     
-    Rectangle wall3 = new Rectangle (0,0, 1000, 200);
-    Rectangle wall1 = new Rectangle (0,0, 100, 700);
-    Rectangle wall5 = new Rectangle (100,600, 900, 100);
-           
+    Rectangle ball = new Rectangle((int)ballX,(int)ballY,15,15);
+    Rectangle wall4 = new Rectangle (300,200, 1, 198);
+    Rectangle wall2 = new Rectangle (900, 200, 200, 400);
+    Rectangle wall3 = new Rectangle (699,200, 1, 199);
+    Rectangle wall1 = new Rectangle (0,0, 100, 700); 
+     
+    // count strokes 
+    int strokes = 0;
+    int holepic = 0;
+    int ballpic = 0;
+    int bholepic = 0;
+    int strokecount = 0;
     
  
     
@@ -119,6 +127,7 @@ public class Gameassignment extends JComponent implements ActionListener {
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
     @Override
+   
     public void paintComponent(Graphics g) {
         // always clear the screen first!
         g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -175,17 +184,53 @@ public class Gameassignment extends JComponent implements ActionListener {
         
         g.setColor(grass);
         g.fillRect(440,700, 60, 50);
+        g.fillRect(800, 700, 100, 75);
         
         g.setColor(Color.BLACK);
         g.fillRect(hit,700, 5, 50);
         
         g.setColor(Color.RED);
         g.drawLine(((int)ballX+7), ((int)ballY + 7) , mouseX, mouseY);
-		
-	g.setColor(Color.BLACK);
-        g.fillRect(0,0, ScreenX ,ScreenY);	
+	
+           Font strokecount = new Font("arial",Font.BOLD, 25);
+        g.setColor(Color.WHITE);
+        g.setFont(strokecount);
+        g.drawString("Par 3", 820, 745);
         
- 
+	g.setColor(Color.BLACK);
+        g.fillRect(0,0, ScreenX ,ScreenY);
+
+        
+        //tell user the hole is complete
+        Font holecomplete = new Font("arial",Font.BOLD, gameover);
+        g.setColor(Color.WHITE);
+        g.setFont(holecomplete);
+        g.drawString("Hole Complete", 350, 300);
+        g.drawString("Strokes - " + strokes, 365, 400);
+        g.setColor(Color.RED);
+        g.drawString("YOU HAVE COMPLETED ", 240, 500);
+        g.drawString("HAYDENS 1 HOLE COURSE! ", 215, 550);
+        g.setColor(Color.WHITE);
+        g.drawString("Press space to play again", 200, 650);
+        
+        g.setColor(grass);
+        g.fillOval(755, 203, holepic, holepic);
+        
+        g.setColor(Color.BLACK);
+        g.fillOval(796, 250, bholepic, bholepic);
+        
+        g.setColor(Color.WHITE);
+        g.fillOval(800, 255, ballpic, ballpic);
+        g.fillRect(804,213, 5, 50);
+        
+        g.setColor(Color.RED);
+        int[] trianglec = {807,820,807};
+        int[] triangled = {215,225,235};
+        g.fillPolygon(trianglec,triangled,3);
+        
+       
+       
+        
         
       
     }
@@ -233,17 +278,17 @@ public class Gameassignment extends JComponent implements ActionListener {
                 r = 4;}
         if (powerBar == false){
             if(hit >= 235 && hit < 285 || hit >= 390 && hit <440)
-                r = 8;}
+                r = 7;}
         if (powerBar == false){
             if(hit >= 285 && hit < 325 || hit >= 350 && hit <390)
-                r = 12;}
+                r = 11;}
         if (powerBar == false){
             if(hit >= 325 && hit < 350)
                 r = 16;}
         
         //frivtion 
         if (r > 0){
-            r = r -.1;
+            r = r -0.07;
                }
         if(r <0.1 ){
             r = 0;
@@ -279,23 +324,25 @@ public class Gameassignment extends JComponent implements ActionListener {
             if (ball.intersects(wall1)){
            angle = (180 + angle * -1) % 360 ;   
         }
-                if (ball.intersects(wall3)){
-           angle = (180 + angle * -1) % 360 ;   
+                 if (ball.intersects(wall3)){
+                     System.out.println("" + angle);
+           angle = (180 - (angle * -1)) % 360 ;   
+                     System.out.println("" + angle);
         }
                     if (ball.intersects(wall4)){
-           angle = (180 + angle * -1) % 360 ;   
+           angle = (180 + (angle * -1)) % 360 ; 
+                        
         }
-       if (ball.intersects(wall5)){
-           angle = (90 + angle * -1) % 360 ;   
-        }
+       
        if(ball.y < 200){
-           angle = ( angle * -1 - 90); 
+           angle = (angle * -1 ); 
         }
-       if (ball.y > 600){
-            angle = (angle * -1 - 90);
+       if (ball.y > 584){
+           ball.y = 585;
+            angle = (angle * -1);
        }
-       if (ball.y < 400 && ball.x >= 300 && ball.x <= 700){
-           angle = ( angle * -1 -90);
+       if (ball.y < 400 && ball.x >= 293 && ball.x <= 700){
+           angle = (angle * -1 );
        }
       
         
@@ -309,10 +356,28 @@ public class Gameassignment extends JComponent implements ActionListener {
     }
 
     private void checkforballinhole() {
-     //  if(ballX >= 795 && ballX <= 800 && ballY >= 250 && ballY >= 255){
-        //ScreenX = WIDTH;
-       // ScreenY = HEIGHT;
-       }
+     if (ball.x >= 795&& 
+         ball.x <= 807 &&
+         ball.y >= 250 &&
+         ball.y <= 260
+         && r <=6 
+       ){
+         ScreenX = 1000;
+         ScreenY = 1000;
+         gameover = 48;
+         holepic=100;
+         bholepic=20;
+         ballpic = 13;
+     }
+     if (ball.x >= 795&& 
+         ball.x <= 807 &&
+         ball.y >= 250 &&
+         ball.y <= 260
+         && r > 6
+       ){
+         r = 6.5;
+         }
+    }
     
 
    
@@ -357,7 +422,21 @@ public class Gameassignment extends JComponent implements ActionListener {
           
           if (keyCode == KeyEvent.VK_SPACE){
               powerBar = true; 
+        
+           
         }  
+          if (keyCode == KeyEvent.VK_SPACE&& ScreenX ==1000){
+         ScreenX= 0;
+         ScreenX = 0;
+         gameover = 0;
+         holepic=0;
+         bholepic=0;
+         ballpic = 0;
+         ballX = 193;
+         ballY = 240;
+         strokes = 0;
+         powerBar = false; 
+               }
         }
 
         // if a key has been released
@@ -366,9 +445,18 @@ public class Gameassignment extends JComponent implements ActionListener {
                        
           int keyCode = e.getKeyCode();
           
-          if (keyCode == KeyEvent.VK_SPACE){
+          if (keyCode == KeyEvent.VK_SPACE && ScreenX !=1000){
               powerBar = false; 
+              strokecount = 0;
+    
+           if(r==0){
+               strokecount = 1;
+               if(ScreenX == 0){
+         strokes = strokes + strokecount;
+               }
+           }
         }  
+          
     }
     }
     @Override

@@ -62,7 +62,7 @@ public class Pongexample extends JComponent implements ActionListener {
    int score2 = 0;
    
    //new font 
-   Font biggerFont = new Font("arial", Font.BOLD, 36)
+  // Font biggerFont = new Font("arial", Font.BOLD, 36)
 
     // GAME VARIABLES END HERE    
 
@@ -195,8 +195,8 @@ public class Pongexample extends JComponent implements ActionListener {
             ball.x = WIDTH/2 -ball.width/2;
             
         }
-        if (ballx + ball.width > WIDTH){
-            //add to player 1 score 
+        if //(ballx + ball.width > WIDTH){
+            add to player 1 score 
             ball.x 
             ball.y
         }
