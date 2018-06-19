@@ -278,17 +278,17 @@ public class Gameassignment extends JComponent implements ActionListener {
                 r = 4;}
         if (powerBar == false){
             if(hit >= 235 && hit < 285 || hit >= 390 && hit <440)
-                r = 7;}
+                r = 6;}
         if (powerBar == false){
             if(hit >= 285 && hit < 325 || hit >= 350 && hit <390)
                 r = 11;}
         if (powerBar == false){
             if(hit >= 325 && hit < 350)
-                r = 16;}
+                r = 15;}
         
         //frivtion 
         if (r > 0){
-            r = r -0.07;
+            r = r -0.06;
                }
         if(r <0.1 ){
             r = 0;
@@ -356,11 +356,11 @@ public class Gameassignment extends JComponent implements ActionListener {
     }
 
     private void checkforballinhole() {
-     if (ball.x >= 795&& 
-         ball.x <= 807 &&
-         ball.y >= 250 &&
-         ball.y <= 260
-         && r <=6 
+     if (ball.x >= 792&& 
+         ball.x <= 808 &&
+         ball.y >= 245 &&
+         ball.y <= 262
+         && r <=5 
        ){
          ScreenX = 1000;
          ScreenY = 1000;
@@ -369,13 +369,14 @@ public class Gameassignment extends JComponent implements ActionListener {
          bholepic=20;
          ballpic = 13;
      }
-     if (ball.x >= 795&& 
-         ball.x <= 807 &&
-         ball.y >= 250 &&
-         ball.y <= 260
-         && r > 6
+     if (ball.x >= 792&& 
+         ball.x <= 808 &&
+         ball.y >= 245 &&
+         ball.y <= 262
+         && r > 5
        ){
-         r = 6.5;
+         
+         r = 5.25;
          }
     }
     
@@ -434,7 +435,7 @@ public class Gameassignment extends JComponent implements ActionListener {
          ballpic = 0;
          ballX = 193;
          ballY = 240;
-         strokes = 0;
+         strokes = -1;
          powerBar = false; 
                }
         }
